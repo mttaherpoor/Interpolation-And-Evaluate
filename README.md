@@ -1,36 +1,36 @@
 # Interpolation And Evalute
 
 ## فهرست :
- ### [هدف](#هدف)
+-  [هدف](#هدف)
 
-### [نصب کتابخونه ها](#نصب-کتابخونه-ها)
+- [نصب کتابخونه ها](#نصب-کتابخونه-ها)
 
-#### -[ نصب pandas](#نصب-pandas)
+    -[ نصب pandas](#نصب-pandas)
 
-#### -[ نصب arcpy](#نصب-arcpy)
+    -[ نصب arcpy](#نصب-arcpy)
 
-#### -[ نصب geopandas](#نصب-geopandas)
+    -[ نصب geopandas](#نصب-geopandas)
 
-#### -[ نصب rasterio](#نصب-rasterio)
+     -[ نصب rasterio](#نصب-rasterio)
 
-#### -[ نصب permetrics](#نصب-permetric)
+     -[ نصب permetrics](#نصب-permetric)
 
 
-### [ویژگی کتابخونه ها](#ویژگی-کتابخونه-ها)
+- [ویژگی کتابخونه ها](#ویژگی-کتابخونه-ها)
 
-#### -[ ویژگی pandas](#نصب-pandas)
+     -[ توابع pandas](#توابع-pandas)
 
-#### -[ ویژگی arcpy](#نصب-arcpy)
+     -[ توابع arcpy](#توابع-arcpy)
 
-#### -[ ویژگی geopandas](#نصب-geopandas)
+     -[ توابع geopandas](#توابع-geopandas)
 
-#### -[ ویژگی rasterio](#نصب-rasterio)
+     -[ توابع rasterio](#توابع-rasterio)
 
-#### -[ ویژگی permetrics](#نصب-permetric)
+     -[ توابع permetrics](#توابع-permetrics)
 
-### [مثال](#مثال)
+- [مثال](#مثال)
 
-### [قدرانی](#قدرانی)
+- [قدرانی](#قدرانی)
 
 ### هدف
 هدف از این کد این است که برای داده های کمی و پیشبینی سایر محدوده در GIS بهترین نوع روش میان بابی را پیدا کرده و بتوان آن روش ها مورد مورد ارزیابی قرار بدهیم مانند RSME ,R , MABE , MAPE و ... 
@@ -124,7 +124,7 @@ python setup.py install
 
 ### ویژگی کتابخونه ها
 
-#### ویژگی  pandas
+#### توابع  pandas
 [ گیت هاب  pandas](https://github.com/pandas-dev/pandas)
 
 [ سایت   pandas](https://pandas.pydata.org)
@@ -142,7 +142,7 @@ python setup.py install
 |to_excel|ExcelFile,index|Excel|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel)|
 
 
-#### ویژگی arcpy
+#### توابع arcpy
 [ گیت هاب  arcpy](https://github.com/arcpy)
 
 [ سایت   arcpy](https://pro.arcgis.com/en/pro-app/latest/tool-reference)
@@ -153,7 +153,7 @@ python setup.py install
 |sa.Kriging|Shapefile or feature class , z_field , method , cell_size|Raster|[لینک](https://pro.arcgis.com/en/pro-app/3.1/tool-reference/spatial-analyst/kriging.htm)|
 |sa.Spline|Shapefile or feature class , z_field , method , cell_size|Raster|[لینک](https://pro.arcgis.com/en/pro-app/3.1/tool-reference/spatial-analyst/spline.htm)|
 
-#### ویژگی geopandas
+#### توابع geopandas
 [ گیت هاب  geopandas](https://github.com/geopandas)
 
 [ سایت   geopandas](https://geopandas.org/en/stable/)
@@ -166,7 +166,7 @@ python setup.py install
 |to_file|filename,driver,encoding|everthing|[لینک](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html#geopandas.GeoDataFrame.to_file)|
 
 
-#### ویژگی rasterio
+#### توابع rasterio
 [ گیت هاب  rasterio](https://github.com/rasterio)
 
 [ سایت   rasterio](https://rasterio.readthedocs.io/en/stable/)
@@ -177,7 +177,7 @@ python setup.py install
 |index|Longitude , Latitude|tuple|[لینک](https://rasterio.readthedocs.io/en/stable/quickstart.html#spatial-indexing)|
 |read|1 , window|array|[لینک](https://rasterio.readthedocs.io/en/stable/topics/reading.html)|
 
-#### ویژگی permetrics
+#### توابع permetrics
 [ گیت هاب  permetrics](https://github.com/thieu1995/permetrics)
 
 [ سایت   permetrics](https://permetrics.readthedocs.io/)

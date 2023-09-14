@@ -215,11 +215,11 @@ python setup.py install
 
 این فایل sample.xlsx می‌باشد.
 
-![عکس ۱ ](image.png) 
+![عکس ۱ ](./image/image.png) 
 
 این فایل model.xlsx می‌باشد.
 
-![Alt text](image-3.png)
+![Alt text](./image/image-3.png)
 
 #### متغیر ها
 متغیر
@@ -261,23 +261,23 @@ interpolation.gdb
 
 اکسل نهایی :
 
-![Alt text](image-4.png)
+![Alt text](./image/image-4.png)
 
 
 اکسل ارزیابی
 
-![Alt text](image-5.png)
+![Alt text](./image/image-5.png)
 
 #### شاخص های ارزیابی
 [ روش های ارزیابی](https://permetrics.readthedocs.io/en/latest/pages/regression.html)
 
 
-![Alt text](image-8.png)
+![Alt text](./image/image-8.png)
 
 که در آن
 متغیر ها بصورت زیر می باشد .
 
-![Alt text](image-9.png)
+![Alt text](./image/image-9.png)
 ### توسعه کد
 
 برای توسعه این کد
@@ -288,11 +288,11 @@ interpolation.gdb
 
 کد مربوطه
 
-![Alt text](image-6.png)
+![Alt text](./image/image-6.png)
 
 #### ارزیابی
 [سایر روش های ارزیابی](https://permetrics.readthedocs.io/en/latest/pages/regression.html)
 
 کد مربوطه
 
-![Alt text](image-7.png)
+![Alt text](./image/image-7.png)

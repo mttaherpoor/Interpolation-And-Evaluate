@@ -1,4 +1,4 @@
-# Interpolation And Evalute
+# Interpolation And Evaluate
 
 ## فهرست :
 -  [هدف](#هدف)

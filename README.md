@@ -13,10 +13,10 @@
 
      -[ نصب rasterio](#نصب-rasterio)
 
-     -[ نصب permetrics](#نصب-permetric)
+     -[ نصب permetrics](#نصب-permetrics)
 
 
-- [ویژگی کتابخونه ها](#ویژگی-کتابخونه-ها)
+- [توابع استفاده شده در کتابخونه ها](#توابع-استفاده-شده-در-کتابخونه-ها)
 
      -[ توابع pandas](#توابع-pandas)
 
@@ -139,7 +139,7 @@ cd permetrics
 python setup.py install
 ```
 
-### ویژگی کتابخونه ها
+### توابع استفاده شده در کتابخونه ها
 
 #### توابع  pandas
 [ گیت هاب  pandas](https://github.com/pandas-dev/pandas)
@@ -287,12 +287,35 @@ interpolation.gdb
 [سایر روش های درون یابی](https://pro.arcgis.com/en/pro-app/3.0/tool-reference/spatial-analyst/an-overview-of-the-interpolation-tools.htm)
 
 کد مربوطه
-
-![Alt text](./image/image-6.png)
+```py
+        if interpolation_type == "Idw":
+            out_raster = arcpy.sa.Idw(temp_address, field,method)       
+        elif interpolation_type == "Kriging":
+            out_raster = arcpy.sa.Kriging(temp_address,method,field)
+        elif interpolation_type == "Spline":
+            out_raster = arcpy.sa.Spline(temp_address,field,spline_type=method,)
+        else :
+            return None
+```
 
 #### ارزیابی
 [سایر روش های ارزیابی](https://permetrics.readthedocs.io/en/latest/pages/regression.html)
 
 کد مربوطه
 
-![Alt text](./image/image-7.png)
+```py
+        if method=="MBE":
+            res=evaluator.mean_bias_error()
+            res_dict[i] =[col,res]  
+        elif method=="RMSE":
+            res=evaluator.root_mean_squared_error()
+            res_dict[i] = [col,res]
+        elif method=="MAPE":
+            res=evaluator.mean_percentage_error()
+            res_dict[i] =[col,res]
+        elif method=="R":
+            res=evaluator.pearson_correlation_coefficient()
+            res_dict[i] = [col,res]
+        else :
+            return None
+```

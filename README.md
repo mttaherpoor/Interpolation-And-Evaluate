@@ -31,10 +31,10 @@ The goal of this code is to find the best interpolation method for quantitative 
 
 ### Installation
  **Clone the repository:**
-   ```bash
+   ```
    git clone https://github.com/yourusername/yourproject.git
    cd yourproject
-  
+   ```
 
 ### Library Installation
 

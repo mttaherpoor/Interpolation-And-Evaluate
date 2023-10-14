@@ -1,86 +1,57 @@
-# Interpolation And Evaluate
+# Interpolation and Evaluation
 
-## فهرست :
--  [هدف](#هدف)
+## Table of Contents:
+- [Objective](#objective)
+- [Library Installation](#library-installation)
+    - [Install pandas](#install-pandas)
+    - [Install arcpy](#install-arcpy)
+    - [Install geopandas](#install-geopandas)
+    - [Install rasterio](#install-rasterio)
+    - [Install permetrics](#install-permetrics)
+- [Functions Used in Libraries](#functions-used-in-libraries)
+    - [Pandas Functions](#pandas-functions)
+    - [Arcpy Functions](#arcpy-functions)
+    - [Geopandas Functions](#geopandas-functions)
+    - [Rasterio Functions](#rasterio-functions)
+    - [Permetrics Functions](#permetrics-functions)
+- [Example](#example)
+    - [Excel Data from YouTube](#excel-data-from-youtube)
+    - [Variables](#variables)
+    - [Output Images](#output-images)
+    - [Evaluation Metrics](#evaluation-metrics)
+- [Code Development](#code-development)
+    - [Interpolation](#interpolation)
+    - [Evaluation](#evaluation)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
-- [نصب کتابخونه ها](#نصب-کتابخونه-ها)
+### Objective
+The goal of this code is to find the best interpolation method for quantitative data and predict other areas in GIS. The selected methods will be evaluated using metrics such as RSME, R, MABE, MAPE, etc. For more details, click [here](https://youtu.be/0rBa5y5-4F0).
 
-    -[ نصب pandas](#نصب-pandas)
+### Library Installation
 
-    -[ نصب arcpy](#نصب-arcpy)
+#### Install Pandas
+This library is installed by default and is recognized as **pd** in the code.
 
-    -[ نصب geopandas](#نصب-geopandas)
+#### Install Arcpy
+If ArcMap or ArcGIS Pro software is installed, **arcpy** is installed by default.
 
-     -[ نصب rasterio](#نصب-rasterio)
+#### Install Geopandas
+0. Install Anaconda.
+1. Remove all environments cloned from Anaconda through the package manager of Anaconda or ArcGIS Pro.
+2. Open the Conda prompt for ArcGIS from the following address:
 
-     -[ نصب permetrics](#نصب-permetrics)
+   ***C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\proenv.bat***
+3. Clone from `arcgispro-py3` using the following command:
 
+   `conda create --name gisenv --clone arcgispro-py3`
 
-- [توابع استفاده شده در کتابخونه ها](#توابع-استفاده-شده-در-کتابخونه-ها)
+   Note: You can use any name instead of gisenv.
+4. Activate the environment created in step 3 using the following command:
 
-     -[ توابع pandas](#توابع-pandas)
+   `activate gisenv`
+5. Install geopandas and its required packages using the following commands:
 
-     -[ توابع arcpy](#توابع-arcpy)
-
-     -[ توابع geopandas](#توابع-geopandas)
-
-     -[ توابع rasterio](#توابع-rasterio)
-
-     -[ توابع permetrics](#توابع-permetrics)
-
-- [مثال](#مثال)
-
-     -[اکسل دریافتی از یوتیوب](#اکسل-دریافتی-از-یوتیوب)
-
-     -[متغیر ها](#متغیر-ها)
-
-     -[عکس های خروجی](#عکس-های-خروجی)
-
-     -[شاخص های ارزیابی](#شاخص-های-ارزیابی)
-
-- [توسعه کد](#توسعه-کد)
-     
-     -[درون یابی](#درون-یابی)
-     
-     -[ارزیابی](#ارزیابی)
-
-
-
-### هدف
-هدف از این کد این است که برای داده های کمی و پیشبینی سایر محدوده در GIS بهترین نوع روش میان بابی را پیدا کرده و بتوان آن روش ها مورد مورد ارزیابی قرار بدهیم مانند RSME ,R , MABE , MAPE و ... 
-برای توضیحات بیشتر 
-[اینجا](https://youtu.be/0rBa5y5-4F0)
-را کلیک کنید .
-
-### نصب کتابخونه ها
-
-#### نصب  pandas
-این کتابخونه بصورت پیش فرض وجود دارد 
-در کد با نام **pd** شناخته می‌شود.
-#### نصب arcpy
-اگر یکی از نرم افزار های Arcmap , Arcgis Pro  نصب باشد بصورت پیش فرض نصب است .
-
-#### نصب geopandas
-
-0. نصب آناکوندا
-
-1. تمام env هایی که clone کردید ر۱ از طریق package manager آناکوندا یا ArcGISPro پاک کنید. 
-
-2. محیط prompt کوندا ArcGIS را از آدرس زیر باز کنید. 
-
-***C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\proenv.bat***
-
-3. با دستور زیر از `arcgispro-py3` کلون بگیرید.
-
-`conda create --name gisenv --clone arcgispro-py3`
-
-نکته: به جای gisenv هر اسمی برای محیط می‌توانید قرار دهید
-
-4. با دستور زیر محیط ساخته شده در مرحله ۳ را فعال کنید:
-
-`activate gisenv`
-
-5. با دستور زیر geopandas و بسته‌های مورد نیازش را نصب کنید:
 ```
 pip install geopandas 
 
@@ -90,233 +61,225 @@ pip install matplotlib
 
 pip install mapclassify
 ```
-#### نصب rasterio
-0. نصب آناکوندا
 
-1. تمام env هایی که clone کردید ر۱ از طریق package manager آناکوندا یا ArcGISPro پاک کنید. 
+#### Install Rasterio
+0. Install Anaconda.
+1. Remove all environments cloned from Anaconda through the package manager of Anaconda or ArcGIS Pro.
+2. Open the Conda prompt for ArcGIS from the following address:
 
-2. محیط prompt کوندا ArcGIS را از آدرس زیر باز کنید. 
+ ***C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\proenv.bat***
 
-***C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\proenv.bat***
-
-3. با دستور زیر از `arcgispro-py3` کلون بگیرید.
-
-`conda create --name gisenv --clone arcgispro-py3`
-
-نکته: به جای gisenv هر اسمی برای محیط می‌توانید قرار دهید
-
-4. با دستور زیر محیط ساخته شده در مرحله ۳ را فعال کنید:
-
-`activate gisenv`
-
-5. 5. با دستور زیر rasterio را نصب کنید:
-```
-pip install rasterio 
-```
-
-#### نصب permetrics
-0. نصب آناکوندا
-
-1. تمام env هایی که clone کردید ر۱ از طریق package manager آناکوندا یا ArcGISPro پاک کنید. 
-
-2. محیط prompt کوندا ArcGIS را از آدرس زیر باز کنید. 
-
-***C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\proenv.bat***
-
-3. با دستور زیر از `arcgispro-py3` کلون بگیرید.
+3. Clone from `arcgispro-py3` using the following command:
 
 `conda create --name gisenv --clone arcgispro-py3`
 
-نکته: به جای gisenv هر اسمی برای محیط می‌توانید قرار دهید
+Note: You can use any name instead of gisenv.
 
-4. با دستور زیر محیط ساخته شده در مرحله ۳ را فعال کنید:
+4. Activate the environment created in step 3 using the following command:
 
 `activate gisenv`
 
-5. با دستور زیر permetrics را نصب کنید:
+5. Install rasterio using the following command:
+
+```
+pip install rasterio
+```
+
+
+#### Install Permetrics
+0. Install Anaconda.
+1. Remove all environments cloned from Anaconda through the package manager of Anaconda or ArcGIS Pro.
+2. Open the Conda prompt for ArcGIS from the following address:
+
+***C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\proenv.bat***
+
+3. Clone from `arcgispro-py3` using the following command:
+
+`conda create --name gisenv --clone arcgispro-py3`
+
+Note: You can use any name instead of gisenv.
+
+4. Activate the environment created in step 3 using the following command:
+
+`activate gisenv`
+
+5. Install permetrics using the following commands:
 ```
 git clone https://github.com/thieu1995/permetrics.git
 cd permetrics
 python setup.py install
 ```
 
-### توابع استفاده شده در کتابخونه ها
+### Functions Used in Libraries
 
-#### توابع  pandas
-[ گیت هاب  pandas](https://github.com/pandas-dev/pandas)
+#### Pandas Functions
+[GitHub Pandas](https://github.com/pandas-dev/pandas)
 
-[ سایت   pandas](https://pandas.pydata.org)
+[Website Pandas](https://pandas.pydata.org)
 
-|اسم تابع|اسم ورودی ها|نوع خروجی|لینک|
+|Function Name|Input Parameters|Output Type|Link|
 |----|----------|-------------|---------|
-|read_excel|ExcelFile , Sheet Name|DataFrame|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html)|
-|iterrows|none|row in DataFrame|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows)|
-|drop|labels , axis|DataFrame or None|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop)|
-|at|row,column|everthing|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.at.html#pandas.DataFrame.at)|
-|DataFrame|data , index| Dataframe|[لینک](https://pandas.pydata.org/docs/reference/frame.html#dataframe)|
-|columns|origin , Destination|object|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html#pandas.DataFrame.columns)|
-|rename|Dictionary|DataFrame|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename)|
-|merge|DataFrame,on,how|DataFrame|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas.DataFrame.merge)|
-|to_excel|ExcelFile,index|Excel|[لینک](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel)|
+|read_excel|ExcelFile, Sheet Name|DataFrame|[Link](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html)|
+|iterrows|None|Row in DataFrame|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows)|
+|drop|Labels, Axis|DataFrame or None|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop)|
+|at|Row, Column|Everything|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.at.html#pandas.DataFrame.at)|
+|DataFrame|Data, Index|DataFrame|[Link](https://pandas.pydata.org/docs/reference/frame.html#dataframe)|
+|columns|Origin, Destination|Object|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html#pandas.DataFrame.columns)|
+|rename|Dictionary|DataFrame|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename)|
+|merge|DataFrame, On, How|DataFrame|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas.DataFrame.merge)|
+|to_excel|ExcelFile, Index|Excel|[Link](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel)|
 
+#### Arcpy Functions
+[GitHub Arcpy](https://github.com/arcpy)
 
-#### توابع arcpy
-[ گیت هاب  arcpy](https://github.com/arcpy)
+[Website Arcpy](https://pro.arcgis.com/en/pro-app/latest/tool-reference)
 
-[ سایت   arcpy](https://pro.arcgis.com/en/pro-app/latest/tool-reference)
-
-|اسم تابع|اسم ورودی ها|نوع خروجی|لینک|
+|Function Name|Input Parameters|Output Type|Link|
 |----|----------|-------------|---------|
-|sa.Idw|Shapefile or feature class , z_field , method , cell_size|Raster|[لینک](https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/idw.htm)|
-|sa.Kriging|Shapefile or feature class , z_field , method , cell_size|Raster|[لینک](https://pro.arcgis.com/en/pro-app/3.1/tool-reference/spatial-analyst/kriging.htm)|
-|sa.Spline|Shapefile or feature class , z_field , method , cell_size|Raster|[لینک](https://pro.arcgis.com/en/pro-app/3.1/tool-reference/spatial-analyst/spline.htm)|
+|sa.Idw|Shapefile or Feature Class, Z_Field, Method, Cell_Size|Raster|[Link](https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/idw.htm)|
+|sa.Kriging|Shapefile or Feature Class, Z_Field, Method, Cell_Size|Raster|[Link](https://pro.arcgis.com/en/pro-app/3.1/tool-reference/spatial-analyst/kriging.htm)|
+|sa.Spline|Shapefile or Feature Class, Z_Field, Method, Cell_Size|Raster|[Link](https://pro.arcgis.com/en/pro-app/3.1/tool-reference/spatial-analyst/spline.htm)|
 
-#### توابع geopandas
-[ گیت هاب  geopandas](https://github.com/geopandas)
+#### Geopandas Functions
+[GitHub Geopandas](https://github.com/geopandas)
 
-[ سایت   geopandas](https://geopandas.org/en/stable/)
+[Website Geopandas](https://geopandas.org/en/stable/)
 
-|اسم تابع|اسم ورودی ها|نوع خروجی|لینک|
+|Function Name|Input Parameters|Output Type|Link|
 |----|----------|-------------|---------|
-|GeoDataFrame|data , geometry|GeoDataFrame|[لینک](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html#geopandas.GeoDataFrame)|
-|points_from_xy|Longitude , Latitude|Point|[لینک](https://geopandas.org/en/stable/gallery/create_geopandas_from_pandas.html)|
-|set_crs|epsg , inplace|Int|[لینک](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.set_crs.html)|
-|to_file|filename,driver,encoding|everthing|[لینک](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html#geopandas.GeoDataFrame.to_file)|
+|GeoDataFrame|Data, Geometry|GeoDataFrame|[Link](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html#geopandas.GeoDataFrame)|
+|points_from_xy|Longitude, Latitude|Point|[Link](https://geopandas.org/en/stable/gallery/create_geopandas_from_pandas.html)|
+|set_crs|EPSG, Inplace|Int|[Link](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.set_crs.html)|
+|to_file|Filename, Driver, Encoding|Everything|[Link](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html#geopandas.GeoDataFrame.to_file)|
 
+#### Rasterio Functions
+[GitHub Rasterio](https://github.com/rasterio)
 
-#### توابع rasterio
-[ گیت هاب  rasterio](https://github.com/rasterio)
+[Website Rasterio](https://rasterio.readthedocs.io/en/stable/)
 
-[ سایت   rasterio](https://rasterio.readthedocs.io/en/stable/)
-
-|اسم تابع|اسم ورودی ها|نوع خروجی|لینک|
+|Function Name|Input Parameters|Output Type|Link|
 |----|----------|-------------|---------|
-|open|Raster|file|[لینک](https://rasterio.readthedocs.io/en/stable/quickstart.html#opening-a-dataset-in-reading-mode)|
-|index|Longitude , Latitude|tuple|[لینک](https://rasterio.readthedocs.io/en/stable/quickstart.html#spatial-indexing)|
-|read|1 , window|array|[لینک](https://rasterio.readthedocs.io/en/stable/topics/reading.html)|
+|open|Raster|File|[Link](https://rasterio.readthedocs.io/en/stable/quickstart.html#opening-a-dataset-in-reading-mode)|
+|index|Longitude, Latitude|Tuple|[Link](https://rasterio.readthedocs.io/en/stable/quickstart.html#spatial-indexing)|
+|read|1, Window|Array|[Link](https://rasterio.readthedocs.io/en/stable/topics/reading.html)|
 
-#### توابع permetrics
-[ گیت هاب  permetrics](https://github.com/thieu1995/permetrics)
+#### Permetrics Functions
+[GitHub Permetrics](https://github.com/thieu1995/permetrics)
 
-[ سایت   permetrics](https://permetrics.readthedocs.io/)
+[Website Permetrics](https://permetrics.readthedocs.io/)
 
-|اسم تابع|اسم ورودی ها|نوع خروجی|لینک|
+|Function Name|Input Parameters|Output Type|Link|
 |----|----------|-------------|---------|
-|RegressionMetric|y_true , y_pred |RegressionMetric|[لینک](https://rasterio.readthedocs.io/en/stable/quickstart.html#opening-a-dataset-in-reading-mode)|
-|mean_bias_error|None|double|[لینک](https://permetrics.readthedocs.io/en/latest/pages/regression/MBE.html)|
-|root_mean_squared_error|None|double|[لینک](https://permetrics.readthedocs.io/en/latest/pages/regression/RMSE.html)|
-|mean_percentage_error|None|double|[لینک](https://permetrics.readthedocs.io/en/latest/pages/regression/MPE.html)|
-|pearson_correlation_coefficient|None|double|[لینک](https://permetrics.readthedocs.io/en/latest/pages/regression/R.html)|
+|RegressionMetric|Y_true, Y_pred|RegressionMetric|[Link](https://permetrics.readthedocs.io/en/latest/pages/regression.html)|
+|mean_bias_error|None|Double|[Link](https://permetrics.readthedocs.io/en/latest/pages/regression/MBE.html)|
+|root_mean_squared_error|None|Double|[Link](https://permetrics.readthedocs.io/en/latest/pages/regression/RMSE.html)|
+|mean_percentage_error|None|Double|[Link](https://permetrics.readthedocs.io/en/latest/pages/regression/MPE.html)|
+|pearson_correlation_coefficient|None|Double|[Link](https://permetrics.readthedocs.io/en/latest/pages/regression/R.html)|
 
-### مثال
+### Example
 
-#### اکسل دریافتی از یوتیوب
-جدول زیر طبق ویدیو [یوتیوب](https://youtu.be/0rBa5y5-4F0)
- زیر می باشد .
+#### Excel Data from YouTube
+The table below is based on the YouTube video.
 
-این فایل sample.xlsx می‌باشد.
+The file is sample.xlsx.
 
-![عکس ۱ ](./image/image.png) 
+![Image 1](./image/image.png)
 
-این فایل model.xlsx می‌باشد.
+This file is model.xlsx.
 
-![Alt text](./image/image-3.png)
+![Image 2](./image/image-3.png)
 
-#### متغیر ها
-متغیر
-**workspace** : آدرسی که در آن باید فایل 
-interpolation.gdb
-ساخته شود 
+#### Variables
+ **workspace**: The address where the interpolation.gdb file should be created.
 
-متغیر **address_input**
-آدرس فایل اکسل sample می باشد .
+ **address_input**: The address of the sample Excel file.
 
-متغیر **zone** زون مورد مطالعه می باشد که برای ایران بین ۳۷ تا ۴۱ می باشد .
+ **zone**: The study zone, which is between 38 and 41 for Iran.
 
-متغیر **raster_address** بصورت پیش فرض C:\temp.tif
-است اگر ارور داد کد ادرس عکس عوض کنین درست می‌شود.
+ **raster_address**: By default, it is C:\temp.tif. If it gives an error, change the image address, and it will work correctly.
 
-متغیر **address_model** 
-آدرس فایل اکسل model
- می باشد .
+ **address_model**: The address of the model Excel file.
 
-متغیر
-**program** :برنامه ادامه پیدا کند یا نه
+ **program**: Continue the program or not.
 
-ستون دوم
-**x**
-باشد و ستون سوم **y** باشد.
+Column 2 should be **x**, and column 3 should be **y**.
 
-متغیر  **field** از اکسل model می خواند .
+ **field**: Reads from the model Excel.
 
-متغیر **final_Excel**
-آدرس اکسل نهایی را می‌پرسد.
+ **final_Excel**: Asks for the final Excel address.
 
-متغیر **start_column**
-شماره ستون روش ها رو ذخیره می‌کند که بصورت پیش فرض عدد *۴* می‌باشد
+ **start_column**: Stores the column number of methods, which is 4 by default.
 
-متغیر **evalute_Excel**
-آدرس اکسل ارزیابی ها را می‌پرسد.
+ **evaluate_Excel**: Asks for the evaluation Excel address.
 
-#### عکس های خروجی
+#### Output Images
 
-اکسل نهایی :
+Final Excel:
 
-![Alt text](./image/image-4.png)
+![Image 3](./image/image-4.png)
 
+Evaluation Excel:
 
-اکسل ارزیابی
+![Image 4](./image/image-5.png)
 
-![Alt text](./image/image-5.png)
+#### Evaluation Metrics
 
-#### شاخص های ارزیابی
-[ روش های ارزیابی](https://permetrics.readthedocs.io/en/latest/pages/regression.html)
+[Evaluation Methods](https://permetrics.readthedocs.io/en/latest/pages/regression.html)
+
+![Image 5](./image/image-8.png)
+
+The variables are as follows:
+
+![Image 6](./image/image-9.png)
+
+### Code Development
+
+#### Interpolation
+[Other Interpolation Methods](https://pro.arcgis.com/en/pro-app/3.0/tool-reference/spatial-analyst/an-overview-of-the-interpolation-tools.htm)
 
 
-![Alt text](./image/image-8.png)
-
-که در آن
-متغیر ها بصورت زیر می باشد .
-
-![Alt text](./image/image-9.png)
-### توسعه کد
-
-برای توسعه این کد
-در دو بخش می‌توان این را انجام داد 
-
-#### درون یابی
-[سایر روش های درون یابی](https://pro.arcgis.com/en/pro-app/3.0/tool-reference/spatial-analyst/an-overview-of-the-interpolation-tools.htm)
-
-کد مربوطه
-```py
-        if interpolation_type == "Idw":
-            out_raster = arcpy.sa.Idw(temp_address, field,method)       
-        elif interpolation_type == "Kriging":
-            out_raster = arcpy.sa.Kriging(temp_address,method,field)
-        elif interpolation_type == "Spline":
-            out_raster = arcpy.sa.Spline(temp_address,field,spline_type=method,)
-        else :
-            return None
+```python
+if interpolation_type == "Idw":
+ out_raster = arcpy.sa.Idw(temp_address, field, method)       
+elif interpolation_type == "Kriging":
+ out_raster = arcpy.sa.Kriging(temp_address, method, field)
+elif interpolation_type == "Spline":
+ out_raster = arcpy.sa.Spline(temp_address, field, spline_type=method)
+else:
+ return None
 ```
+#### Evaluation
 
-#### ارزیابی
-[سایر روش های ارزیابی](https://permetrics.readthedocs.io/en/latest/pages/regression.html)
-
-کد مربوطه
+[Other Evaluation Methods]((https://permetrics.readthedocs.io/en/latest/pages/regression.html))
 
 ```py
-        if method=="MBE":
-            res=evaluator.mean_bias_error()
-            res_dict[i] =[col,res]  
-        elif method=="RMSE":
-            res=evaluator.root_mean_squared_error()
-            res_dict[i] = [col,res]
-        elif method=="MAPE":
-            res=evaluator.mean_percentage_error()
-            res_dict[i] =[col,res]
-        elif method=="R":
-            res=evaluator.pearson_correlation_coefficient()
-            res_dict[i] = [col,res]
-        else :
-            return None
+if method == "MBE":
+    res = evaluator.mean_bias_error()
+    res_dict[i] = [col, res]  
+elif method == "RMSE":
+    res = evaluator.root_mean_squared_error()
+    res_dict[i] = [col, res]
+elif method == "MAPE":
+    res = evaluator.mean_percentage_error()
+    res_dict[i] = [col, res]
+elif method == "R":
+    res = evaluator.pearson_correlation_coefficient()
+    res_dict[i] = [col, res]
+else:
+    return None
 ```
+### Contributing
+
+1. Fork the repository.
+
+2. Create a new branch: git checkout -b feature-newfeature.
+
+3. Commit changes: git commit -m 'Add new feature'.
+4. Push to the branch: git push origin feature-newfeature.
+
+5. Submit a pull request.
+
+### Contact
+
+- Email: taherpoor@ut.ac.ir
+- Telegram : mttaherpoor

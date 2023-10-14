@@ -28,6 +28,13 @@
 ### Objective
 The goal of this code is to find the best interpolation method for quantitative data and predict other areas in GIS. The selected methods will be evaluated using metrics such as RSME, R, MABE, MAPE, etc. For more details, click [here](https://youtu.be/0rBa5y5-4F0).
 
+### Installation
+ **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/yourproject.git
+   cd yourproject
+  '''
+
 ### Library Installation
 
 #### Install Pandas

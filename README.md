@@ -2,7 +2,7 @@
 
 ## Table of Contents:
 - [Objective](#objective)
-- [Installation](#Installation)
+- [Installation](#installation)
 - [Library Installation](#library-installation)
     - [Install pandas](#install-pandas)
     - [Install arcpy](#install-arcpy)
@@ -34,7 +34,7 @@ The goal of this code is to find the best interpolation method for quantitative 
    ```bash
    git clone https://github.com/yourusername/yourproject.git
    cd yourproject
-  ```
+  
 
 ### Library Installation
 

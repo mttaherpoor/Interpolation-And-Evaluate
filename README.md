@@ -250,7 +250,7 @@ else:
 ```
 #### Evaluation
 
-[Other Evaluation Methods]((https://permetrics.readthedocs.io/en/latest/pages/regression.htm))
+[Other Evaluation Methods]((https://permetrics.readthedocs.io/en/latest/pages/regression.html)
 
 ```py
 if method == "MBE":

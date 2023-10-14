@@ -274,7 +274,7 @@ else:
 
 2. Create a new branch:`git checkout -b feature-newfeature`.
 
-4. Commit changes: `git commit -m 'Add new feature'.
+4. Commit changes: `git commit -m 'Add new feature'`.
 5. Push to the branch: `git push origin feature-newfeature`.
 
 6. Submit a pull request.
